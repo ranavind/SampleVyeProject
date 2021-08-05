@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "_Root";
+}
+@if (IsSectionDefined("Breadcrumb"))
+{
+    @section Breadcrumb {
+        @RenderSection("Breadcrumb")
+    }
+}
+<div class="center-1">
+    @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.MainColumnBefore })
+    @RenderBody()
+    @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.MainColumnAfter })
+</div>
+<link href="~/css/product/bootstrap.css" rel="stylesheet" />
+<link href="~/css/product/offcanvas.css" rel="stylesheet" />
+<link href="~/css/product/owl.carousel.min.css" rel="stylesheet" />
+<link href="~/css/product/swiper.css" rel="stylesheet" />
+<link href="~/css/product/custom.css" rel="stylesheet" />
