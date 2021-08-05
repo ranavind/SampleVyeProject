@@ -3,22 +3,22 @@
   sy.components.push({
     id: "genderSelection",
     element: "sy-gender-product",
-   
+
     component: {
       name: "genderSelection",
       data() {
-        
+
         return {
           items: [
-            { id: 1, text: 'Women', value: 'women', selected: 'false', isactive: '', target:"pills-women"},
-            { id: 2, text: 'Men', value: 'men', selected: 'true', isactive: 'active', target: "pills-Men"},
-            { id: 3, text: 'Youth', value: 'youth', selected: 'false', isactive: '', target: "pills-youth"},
+            { id: 1, text: 'Women', value: 'women', selected: 'false', isactive: '', target: "pills-women" },
+            { id: 2, text: 'Men', value: 'men', selected: 'true', isactive: 'active', target: "pills-Men" },
+            { id: 3, text: 'Youth', value: 'youth', selected: 'false', isactive: '', target: "pills-youth" },
           ],
-          
-        selectedTab: "pills-Men"
+
+          selectedTab: "pills-Men"
         }
-        
-      },  
+
+      },
       computed: {
         selectedTarget() {
           return this.items.filter(i => i.isactive === "active").selectedTarget;
@@ -29,9 +29,9 @@
 
       },
       methods: {
-        filterFits: function (gender,event) {
-         this.$store.commit("productSearch_SetFilterFits", gender);
-          
+        filterFits: function (gender, event) {
+          this.$store.commit("productSearch_SetFilterFits", gender);
+
           for (i = 0; i < this.items.length; i++) {
 
             if (this.items[i].text === gender) {
@@ -44,7 +44,7 @@
             // <------ ... IT WORKS
           }
         }
-               
+
       },
       template: `
             <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">

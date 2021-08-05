@@ -3,17 +3,25 @@
     Layout = "_ColumnsOne";
 
     //title
-    Html.AddTitleParts(T("PageTitle.ContactUs").Text);
+   // Html.AddTitleParts(T("PageTitle.ContactUs").Text);
     //page class
-    Html.AppendPageCssClassParts("html-contact-page");
+   // Html.AppendPageCssClassParts("html-contact-page");
 }
-<div class="page contact-page">
-    <div class="page-title">
-        <h1>@T("PageTitle.ContactUs")</h1>
+
+<main>
+
+    <div class="bg-dark text-white py-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h3>@T("PageTitle.ContactUs")</h3>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="page-body">
+    <div class="container">
         @await Component.InvokeAsync("TopicBlock", new { systemName = "ContactUs" })
-        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ContactUsTop })
+       @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ContactUsTop })
         @if (Model.SuccessfullySent)
         {
             <div class="result">
@@ -24,46 +32,91 @@
         {
             <form asp-route="ContactUs" method="post">
                 <div asp-validation-summary="ModelOnly" class="message-error"></div>
-                <div class="fieldset">
-                    <div class="form-fields">
-                        <div class="inputs">
-                            <label asp-for="FullName" asp-postfix=":"></label>
-                            <input asp-for="FullName" placeholder="@T("ContactUs.FullName.Hint")" class="fullname" />
-                            <nop-required />
-                            <span asp-validation-for="FullName"></span>
-                        </div>
-                        <div class="inputs">
-                            <label asp-for="Email" asp-postfix=":"></label>
-                            <input asp-for="Email" placeholder="@T("ContactUs.Email.Hint")" class="email" />
-                            <nop-required />
-                            <span asp-validation-for="Email"></span>
-                        </div>
-                        @if (Model.SubjectEnabled)
-                        {
-                            <div class="inputs">
-                                <label asp-for="Subject" asp-postfix=":"></label>
-                                <input asp-for="Subject" placeholder="@T("ContactUs.Subject.Hint")" class="subject" />
-                                <nop-required />
-                                <span asp-validation-for="Subject"></span>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card border-0 bg-transparent">
+                            <div class="card-body mx-md-5 px-md-5 mb-4">
+                                <div class=" mx-lg-5">
+                                    <div class="row row-cols-1  d-flex justify-content-center">
+                                        <div class="col">
+                                            <div class="card shadow border-0">
+                                                <div class="card-header text-center py-2 ">
+                                                    <p>
+                                                        Have a question about an order, our shirts, our site, or the meaning of life? We can help!
+                                                        Just submit your question (or even a comment) and we’ll get back to you as soon as we can.
+                                                    </p>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="px-lg-4 loginForm ">
+
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="input-group mb-3">
+                                                                    <!-- mb-3 Changed to mb-1 -->
+                                                                    <span class="input-group-text form-icon"><i class="fas fa-user"></i></span>
+                                                                    <div class="form-floating form-input">
+
+                                                                        <input class="form-control" asp-for="FullName" placeholder="@T("ContactUs.FullName.Hint")" />
+
+                                                                        <label asp-for="FullName" asp-postfix=":"></label>
+                                                                        
+                                                                        <span asp-validation-for="FullName"></span>
+
+                                                                    </div><nop-required />
+                                                                    <div class="error pt-1 invisible">A simple alert (visible and invisible class added)</div>
+                                                                </div>
+                                                                <div class="input-group mb-2">
+                                                                    <span class="input-group-text form-icon"><i class="fas fa-envelope"></i></span>
+                                                                    <div class="form-floating form-input">
+
+                                                                        <input asp-for="Email" placeholder="@T("ContactUs.Email.Hint")" class="email form-control" />
+                                                                        
+                                                                        <label asp-for="Email" asp-postfix=":"> Your email address</label>
+                                                                        <span asp-validation-for="Email"></span>
+                                                                       
+                                                                    </div><nop-required />
+                                                                    <div class="error pt-1 invisible">A simple danger alert (visible and invisible class)</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="input-group mb-2">
+                                                                    <span class="input-group-text form-icon align-items-baseline pt-3"><i class="fas fa-question-circle"></i></span>
+                                                                    <div class="form-floating form-input">
+
+                                                                        <textarea asp-for="Enquiry" placeholder="@T("ContactUs.Enquiry.Hint")" class="enquiry form-control"></textarea>
+
+                                                                        <span asp-validation-for="Enquiry"></span>
+                                                                        <label asp-for="Enquiry" asp-postfix=":">Enter Your question</label>
+
+                                                                    </div> <nop-required />
+                                                                    <div class="error pt-1 invisible">A simple danger alert (visible and invisible class)</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row my-3">
+                                                            <div class="col text-center">
+                                                                <input type="submit" name="send-email" class="loginBtn px-5" value="@T("ContactUs.Button")" />
+                                                                
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
-                        }
-                        <div class="inputs">
-                            <label asp-for="Enquiry" asp-postfix=":"></label>
-                            <textarea asp-for="Enquiry" placeholder="@T("ContactUs.Enquiry.Hint")" class="enquiry"></textarea>
-                            <nop-required />
-                            <span asp-validation-for="Enquiry"></span>
                         </div>
-                        @if (Model.DisplayCaptcha)
-                        {
-                            <nop-captcha />
-                        }
+
                     </div>
                 </div>
-                <div class="buttons">
-                    <input type="submit" name="send-email" class="button-1 contact-us-button" value="@T("ContactUs.Button")" />
-                </div>
-            </form>
+        
+        </form>
         }
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ContactUsBottom })
-    </div>
-</div>
+
+        </div>
+    </main>

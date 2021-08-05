@@ -19,15 +19,15 @@
       },
       mounted() {
         this.$store.commit("productSearch_SetFilterShirts", "short sleeve t");
-       // this.$store.commit('productSearch_ClearProducts');
+        // this.$store.commit('productSearch_ClearProducts');
         //this.$store.dispatch('productSearch_executeSearch');
       },
       methods: {
         show: function (event) {
           this.isHidden = true;
         },
-       
-        filterShirts: function (shirt,event) {
+
+        filterShirts: function (shirt, event) {
           this.$store.commit("productSearch_SetFilterShirts", shirt);
           this.onSearch(event);
         },
@@ -41,7 +41,7 @@
           // This handles a phenomenon in IOS where the screen 
           // scrolls up when the virtual keyboard opens and does not scroll
           // back.  This is a manual intervention.
-         // this.scrollTop();
+          // this.scrollTop();
         },
       },
       template: `
