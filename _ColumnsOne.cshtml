@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "_Root";
+}
+@if (IsSectionDefined("Breadcrumb"))
+{
+    @section Breadcrumb {
+        @RenderSection("Breadcrumb")
+    }
+}
+<div class="center-1">
+    @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.MainColumnBefore })
+    @RenderBody()
+    @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.MainColumnAfter })
+</div>
+
+<link href="~/css/product/bootstrap.css" rel="stylesheet" />
+<link href="~/css/product/offcanvas.css" rel="stylesheet" />
+<link href="~/css/product/owl.carousel.min.css" rel="stylesheet" />
+<link href="~/css/product/swiper.css" rel="stylesheet" />
+<link href="~/css/product/custom.css" rel="stylesheet" />
+<link href="~/css/product/responsive.css" rel="stylesheet" />
+<script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=e473ce4b-0e11-46d5-a961-64b484b4fbae"></script>

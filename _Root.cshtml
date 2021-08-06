@@ -1,0 +1,144 @@
+﻿@{
+    Layout = "_Root.Head";
+}
+@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.BodyStartHtmlTagAfter })
+@await Html.PartialAsync("_Notifications")
+@await Html.PartialAsync("_JavaScriptDisabledWarning")
+@await Html.PartialAsync("_OldInternetExplorerWarning")
+
+
+@if (Html.IsReleaseBuild())
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.global.prod.js" integrity="sha512-M8VjsuCj1iBzrwKloFNjvQBmFXT2oF0MWExoLGpQT2nEx5tq7CP+BhWGJdczT1LoWAhyqHh+LJ6ihHSVGyclHw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/4.0.0-rc.1/vuex.global.min.js" integrity="sha512-eslIOb0ySVXhhyGkne1HLfBpJ0g7aOu32dKJl/3kWtttF2X2nbalM2wCo/zKrHuVy0OMWyYJiIazmt1xzbFXJg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js" integrity="sha512-DZqqY3PiOvTP9HkjIWgjO6ouCbq+dxqWoJZ/Q+zPYNHmlnI2dQnbJ5bxAHpAMw+LXRm4D72EIRXzvcHQtE8/VQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.min.js"></script>
+}
+else
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.0.2/vue.global.js" integrity="sha512-REb0S2epbS0XtS28ifNa1haxmTZigXjB+Tx5IHCvXZndWB2RL431Vt1qONzFoe0dPwA8WGow+xxkQwhVr44nRg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/4.0.0-rc.1/vuex.global.js" integrity="sha512-p+IHwYyrFBq5wJrhmCicvE6lnmnUEqemHxVmDVxBan0QRxYAY9bRp9I651dG0fCC9X9XLWKYIaT7BMIhUp5A7g==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.js" integrity="sha512-bYkaBWaFtfPIMYt9+CX/4DWgfrjcHinjerNYxQmQx1VM76eUsPPKZa5zWV8KksVkBF/DaHSADCwil2J5Uq2ctA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.7/signalr.js"></script>
+};
+<script src="https://cdnjs.cloudflare.com/ajax/libs/simple-peer/9.9.3/simplepeer.min.js" integrity="sha512-0j8yvyjRIWuD9DD6gIKgQArBwURjNZoud+kvmcJC4zmxusqjnrHS7jwUZIBASfoZ00H5TAJJM5RH7RbxOU0iig==" crossorigin="anonymous"></script>
+
+<div class="master-wrapper-page" id="syApp">
+    @*//ToDo: Change this to be dynamic *@
+    @*@await Component.InvokeAsync("AdminHeaderLinks")*@
+
+    @await Html.PartialAsync("_Header")
+    <script asp-location="Footer">
+        var localized_data = {
+            AjaxCartFailure: "@T("AjaxCart.Failure")"
+        };
+        AjaxCart.init(false, '.header-links .cart-qty', '.header-links .wishlist-qty', '#flyout-cart', localized_data);
+    </script>
+
+    @*//ToDo: Change this to be dynamic *@
+    @*<div class="header-menu">
+            @await Component.InvokeAsync("TopMenu")
+        </div>*@
+
+    <main class="master-wrapper-content">
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ContentBefore })
+
+        @if (IsSectionDefined("Breadcrumb"))
+        {
+            @RenderSection("Breadcrumb")
+        }
+        <div class="master-column-wrapper">
+            @RenderBody()
+        </div>
+        @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ContentAfter })
+    </main>
+    <div v-if="false">
+        @await Component.InvokeAsync("Footer")
+    </div>
+
+    <sy-waiting></sy-waiting>
+    <sy-message-dialog></sy-message-dialog>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/offcanvas.js"></script>
+</div>
+
+@if (Html.IsReleaseBuild())
+{
+    <script type="text/javascript" src="~/js/shirtyourself.js" asp-append-version="true"></script>
+    <script src="~/js/genderSelection.js" asp-append-version="true"></script>
+    <script src="~/js/newProductHeader.js" asp-append-version="true"></script>
+    <script src="~/js/newProductScreen.js" asp-append-version="true"></script>
+}
+else
+{
+    <script src="~/js/yba/app/startup.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/sy.init.js" asp-append-version="true"></script>
+
+    <script src="~/js/yba/app/checkout/checkout.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/checkout/checkout.state.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/checkout/material-picker.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/checkout/size-picker.component.js" asp-append-version="true"></script>
+
+    <script src="~/js/yba/app/core/message-dialog.component.js" asp-append-version="true"></script>
+    <script src="~/js/genderSelection.js" asp-append-version="true"></script>
+    <script src="~/js/newProductHeader.js" asp-append-version="true"></script>
+    <script src="~/js/newProductScreen.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/core/message-dialog.state.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/core/responsive.state.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/core/splash.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/core/splash.state.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/core/url-watcher.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/core/waiting-overlay.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/core/waiting-overlay.state.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/core/product.state.js" asp-append-version="true"></script>
+
+    <script src="~/js/yba/app/locker-room/locker-room.state.js" asp-append-version="true"></script>
+
+    <script src="~/js/yba/app/sharing/sharing.state.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/sharing/sharing.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/sharing/sharing-local.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/sharing/sharing-remote.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/sharing/sharing-dialog.component.js" asp-append-version="true"></script>
+
+    <script src="~/js/yba/app/image-search/image-dialog.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/image-search/image-dialog.state.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/image-search/image-my-files.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/image-search/image-preview.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/image-search/image-search-filter.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/image-search/image-search-pager.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/image-search/image-search-results.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/image-search/image-upload.component.js" asp-append-version="true"></script>
+
+    <script src="~/js/yba/app/product-search/product-dialog.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/product-search/product-dialog.state.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/product-search/product-preview.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/product-search/product-search-filter.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/product-search/product-search-results.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/product-search/product-search-tab.component.js" asp-append-version="true"></script>
+
+    <script src="~/js/yba/app/toolbars/toolbar-editors.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/toolbars/toolbar-purchase.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/toolbars/toolbars.state.js" asp-append-version="true"></script>
+
+    <script src="~/js/yba/app/toolbars/tools/color-picker-menu.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/toolbars/tools/image-picker-menu.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/toolbars/tools/pan-picker.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/toolbars/tools/pan-picker.state.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/toolbars/tools/price-popover.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/toolbars/tools/product-description-popover.component.js" asp-append-version="true"></script>
+    <script src="~/js/yba/app/toolbars/tools/text-picker-menu.component.js" asp-append-version="true"></script>
+
+    <script src="~/js/yba/app/sy-vue.app.js" asp-append-version="true"></script>
+}
+
+@await Component.InvokeAsync("EuCookieLaw")
+@await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.BodyEndHtmlTagBefore })
+<script>
+    (function () {
+        'use strict'
+
+        document.querySelector('#navbarSideCollapse').addEventListener('click', function () {
+            document.querySelector('.offcanvas-collapse').classList.toggle('open')
+        })
+    })()
+</script>
